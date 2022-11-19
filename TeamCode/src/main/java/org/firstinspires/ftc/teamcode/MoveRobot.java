@@ -28,15 +28,15 @@ public class MoveRobot extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        // MotorName.setPower(); 0-1
-        // sleep(time); *time is in milliseconds
-        // MotorName.setDirection();
+    // MotorName.setPower(); 0-1
+    // sleep(time); *time is in milliseconds
+    // MotorName.setDirection();
 
-        moveForward(.5, 5000);
-        //  moveBackward(.5, 5000);
-        //  moveRight(.5, 5000);
-        //  moveLeft(.5, 5000);
-
+    moveForward(.5,5000);
+    //  moveBackward(.5, 5000);
+    //  moveRight(.5, 5000);
+    //  moveLeft(.5, 5000);
+}
         public void moveForward(double power,int time ) {
             FrontLeftMotor.setDirection(REVERSE);
             FrontRightMotor.setDirection(REVERSE);
@@ -103,4 +103,4 @@ public class MoveRobot extends LinearOpMode {
         }
 
     }
-}
+
