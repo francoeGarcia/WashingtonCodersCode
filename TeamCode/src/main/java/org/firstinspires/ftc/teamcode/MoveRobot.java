@@ -32,7 +32,7 @@ public class MoveRobot extends LinearOpMode {
     // sleep(time); *time is in milliseconds
     // MotorName.setDirection();
 
-    moveForward(.5,5000);
+//    moveForward(.5,5000);
     //  moveBackward(.5, 5000);
     //  moveRight(.5, 5000);
     //  moveLeft(.5, 5000);
