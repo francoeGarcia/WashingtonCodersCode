@@ -22,8 +22,8 @@ public class Claw extends LinearOpMode {
         if (opModeIsActive()) {
             while (opModeIsActive()) {
                 telemetry.addData("Status", "Initialized");
-                //telemetry.addData("Status", gamepad1.right_trigger);
-                ClawMotor.setPosition(3*gamepad1.right_trigger);
+                telemetry.addData("Status", gamepad1.right_trigger);
+                ClawMotor.setPosition(gamepad1.right_trigger*3);
             }
         }
     }
