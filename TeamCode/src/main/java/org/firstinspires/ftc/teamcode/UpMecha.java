@@ -34,18 +34,7 @@ public class UpMecha extends LinearOpMode {
             while (opModeIsActive()) {
                 telemetry.addData("Status", "Initialized");
 
-//                ClawMotor.setPosition(3.847432365345654345676545676544567876036912746346282368383743894573543456789876534567898765445670984346785676478567*gamepad1.right_trigger);
-//                //UpDown.setPower(6*gamepad1.left_trigger-.5);
 //
-//                if(UpDown.getCurrentPosition()<10 && gamepad1.left_trigger>0.3){
-//                    UpDown.setPower(gamepad1.left_trigger);
-//                }
-//                else if(UpDown.getCurrentPosition()>0){
-//                    UpDown.setPower(-0.5);
-//                }
-//                else{
-//                    UpDown.setPower(0);
-//                }
                 double leftY = gamepad1.left_stick_y;
                 double leftX = gamepad1.left_stick_x;
                 double rightX = gamepad1.right_stick_x;

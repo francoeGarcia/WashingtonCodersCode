@@ -23,7 +23,6 @@ public class telop extends LinearOpMode {
 //        FrontRightMotor.setPower(frontRight);
         BackLeftMotor.setPower(backLeft);
         BackRightMotor.setPower(backRight);
-        //UpDown.setPower(upDown);
     }
 
     @Override

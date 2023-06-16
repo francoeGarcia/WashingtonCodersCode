@@ -2,6 +2,9 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.openftc.apriltag.AprilTagDetection;
@@ -15,6 +18,20 @@ import java.util.ArrayList;
 @TeleOp
 public class Camera_Code extends LinearOpMode
 {
+    private DcMotor FrontLeftMotor;
+    private DcMotor FrontRightMotor;
+    private DcMotor BackLeftMotor;
+    private DcMotor BackRightMotor;
+    private DcMotor UpDown;
+    private Servo ClawMotor;
+
+    public void setPower(double frontLeft, double frontRight, double backLeft, double backRight){
+        FrontLeftMotor.setPower(frontLeft);
+        FrontRightMotor.setPower(frontRight);
+        BackLeftMotor.setPower(backLeft);
+        BackRightMotor.setPower(backRight);
+    }
+
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
 
@@ -32,17 +49,33 @@ public class Camera_Code extends LinearOpMode
     // UNITS ARE METERS
     double tagsize = 0.166;
 
-    int left = 17;
-    int middle = 18;
-    int right = 19;
+    int left = 0;
+    int middle = 0;
+    int right = 0;
 
     AprilTagDetection tagOfInterest = null;
 
     @Override
-    public void runOpMode()
+    public void runOpMode() throws InterruptedException
     {
-        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-        camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
+
+        FrontLeftMotor = hardwareMap.get(DcMotor.class, "frontLeft");
+        FrontLeftMotor.setPower(0);
+        FrontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        FrontRightMotor = hardwareMap.get(DcMotor.class, "frontRight");
+        FrontRightMotor.setPower(0);
+        FrontRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);//FORWARD=BACKWARDS real life
+
+        BackLeftMotor = hardwareMap.get(DcMotor.class, "backLeft");
+        BackLeftMotor.setPower(0);
+        BackLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        BackRightMotor = hardwareMap.get(DcMotor.class, "backRight");
+        BackRightMotor.setPower(0);
+        BackRightMotor.setDirection(DcMotorSimple.Direction.FORWARD); //FORWARD=BACKWARDS real life
+
+        camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"));
         aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagsize, fx, fy, cx, cy);
 
         camera.setPipeline(aprilTagDetectionPipeline);
@@ -51,6 +84,7 @@ public class Camera_Code extends LinearOpMode
             @Override
             public void onOpened()
             {
+                camera.setViewportRenderer(OpenCvCamera.ViewportRenderer.GPU_ACCELERATED);
                 camera.startStreaming(800,448, OpenCvCameraRotation.UPRIGHT);
             }
 
@@ -146,11 +180,17 @@ public class Camera_Code extends LinearOpMode
 
         /* Actually do something useful */
         if(tagOfInterest.id == left){
-            //do something
-        }else if(tagOfInterest.id == null|| tagOfInterest.id == middle){
-            //do something
+            setPower(-.5,-.5,.5,.5);
+            sleep(3000);
+            setPower(-.5,0,.5,.5);
+        }else if(tagOfInterest.id == middle){
+            setPower(-.5,-.5,.5,.5);
+            sleep(3000);
+            setPower(0,0,0,0);
         }else if(tagOfInterest.id == right){
-            //do something
+            setPower(-.5,-.5,.5,.5);
+            sleep(3000);
+            setPower(0,0,0,0);
         }
 
 
